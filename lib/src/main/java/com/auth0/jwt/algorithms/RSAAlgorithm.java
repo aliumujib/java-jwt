@@ -1,17 +1,17 @@
 package com.auth0.jwt.algorithms;
 
+import android.util.Base64;
+
 import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.RSAKeyProvider;
 
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.util.Base64;
 
 /**
  * Subclass representing an RSA signing algorithm
@@ -41,7 +41,7 @@ class RSAAlgorithm extends Algorithm {
     @Override
     public void verify(DecodedJWT jwt) throws SignatureVerificationException {
         try {
-            byte[] signatureBytes = Base64.getUrlDecoder().decode(jwt.getSignature());
+            byte[] signatureBytes = Base64.decode(jwt.getSignature(), Base64.URL_SAFE | Base64.NO_PADDING);
             RSAPublicKey publicKey = keyProvider.getPublicKeyById(jwt.getKeyId());
             if (publicKey == null) {
                 throw new IllegalStateException("The given Public Key is null.");

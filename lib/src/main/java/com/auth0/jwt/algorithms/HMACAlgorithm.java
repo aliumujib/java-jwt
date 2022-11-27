@@ -1,5 +1,7 @@
 package com.auth0.jwt.algorithms;
 
+import android.util.Base64;
+
 import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -8,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.Base64;
 
 /**
  * Subclass representing an Hash-based MAC signing algorithm
@@ -50,7 +51,7 @@ class HMACAlgorithm extends Algorithm {
     @Override
     public void verify(DecodedJWT jwt) throws SignatureVerificationException {
         try {
-            byte[] signatureBytes = Base64.getUrlDecoder().decode(jwt.getSignature());
+            byte[] signatureBytes = Base64.decode(jwt.getSignature(), Base64.URL_SAFE | Base64.NO_PADDING);
             boolean valid = crypto.verifySignatureFor(
                     getDescription(), secret, jwt.getHeader(), jwt.getPayload(), signatureBytes);
             if (!valid) {

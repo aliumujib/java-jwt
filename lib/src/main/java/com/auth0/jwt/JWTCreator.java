@@ -14,6 +14,8 @@ import java.time.Instant;
 import java.util.*;
 import java.util.Map.Entry;
 
+import android.util.Base64;
+
 /**
  * The JWTCreator class holds the sign method to generate a complete JWT (with Signature)
  * from a given Header and Payload content.
@@ -566,14 +568,14 @@ public final class JWTCreator {
     }
 
     private String sign() throws SignatureGenerationException {
-        String header = Base64.getUrlEncoder().withoutPadding()
-                .encodeToString(headerJson.getBytes(StandardCharsets.UTF_8));
-        String payload = Base64.getUrlEncoder().withoutPadding()
-                .encodeToString(payloadJson.getBytes(StandardCharsets.UTF_8));
+        String header = Base64
+                .encodeToString(headerJson.getBytes(StandardCharsets.UTF_8), Base64.URL_SAFE | Base64.NO_PADDING);
+        String payload = Base64
+                .encodeToString(payloadJson.getBytes(StandardCharsets.UTF_8), Base64.URL_SAFE | Base64.NO_PADDING);
 
         byte[] signatureBytes = algorithm.sign(header.getBytes(StandardCharsets.UTF_8),
                 payload.getBytes(StandardCharsets.UTF_8));
-        String signature = Base64.getUrlEncoder().withoutPadding().encodeToString((signatureBytes));
+        String signature = Base64.encodeToString((signatureBytes), Base64.URL_SAFE | Base64.NO_PADDING);
 
         return String.format("%s.%s.%s", header, payload, signature);
     }

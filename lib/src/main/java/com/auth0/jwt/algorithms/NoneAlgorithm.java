@@ -1,9 +1,10 @@
 package com.auth0.jwt.algorithms;
 
+import android.util.Base64;
+
 import com.auth0.jwt.exceptions.SignatureGenerationException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import java.util.Base64;
 
 class NoneAlgorithm extends Algorithm {
 
@@ -14,7 +15,7 @@ class NoneAlgorithm extends Algorithm {
     @Override
     public void verify(DecodedJWT jwt) throws SignatureVerificationException {
         try {
-            byte[] signatureBytes = Base64.getUrlDecoder().decode(jwt.getSignature());
+            byte[] signatureBytes = Base64.decode(jwt.getSignature(), Base64.URL_SAFE | Base64.NO_PADDING);
 
             if (signatureBytes.length > 0) {
                 throw new SignatureVerificationException(this);

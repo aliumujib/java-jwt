@@ -10,7 +10,7 @@ import com.auth0.jwt.interfaces.Payload;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.Base64;
+import android.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +38,8 @@ final class JWTDecoder implements DecodedJWT, Serializable {
         String headerJson;
         String payloadJson;
         try {
-            headerJson = new String(Base64.getUrlDecoder().decode(parts[0]), StandardCharsets.UTF_8);
-            payloadJson = new String(Base64.getUrlDecoder().decode(parts[1]), StandardCharsets.UTF_8);
+            headerJson = new String(Base64.decode(parts[0] , Base64.URL_SAFE | Base64.NO_PADDING), StandardCharsets.UTF_8);
+            payloadJson = new String(Base64.decode(parts[1], Base64.URL_SAFE | Base64.NO_PADDING), StandardCharsets.UTF_8);
         } catch (NullPointerException e) {
             throw new JWTDecodeException("The UTF-8 Charset isn't initialized.", e);
         } catch (IllegalArgumentException e) {
