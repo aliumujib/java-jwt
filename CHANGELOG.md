@@ -102,7 +102,7 @@ See the changelog entries for additional details.
 - Remove impl package export in module-info [\#553](https://github.com/auth0/java-jwt/pull/553) ([poovamraj](https://github.com/poovamraj))
 - Fix header claims serialization [\#549](https://github.com/auth0/java-jwt/pull/549) ([jimmyjames](https://github.com/jimmyjames))
 - Serialize dates in collections as seconds since epoch [\#534](https://github.com/auth0/java-jwt/pull/534) ([jimmyjames](https://github.com/jimmyjames))
-- Replace com.auth0.jwt.interfaces.Clock with java.time.Clock [\#532](https://github.com/auth0/java-jwt/pull/532) ([jimmyjames](https://github.com/jimmyjames))
+- Replace com.auth0.jwt.android.interfaces.Clock with java.time.Clock [\#532](https://github.com/auth0/java-jwt/pull/532) ([jimmyjames](https://github.com/jimmyjames))
 
 ## [3.19.2](https://github.com/auth0/java-jwt/tree/3.19.2) (2022-05-05)
 [Full Changelog](https://github.com/auth0/java-jwt/compare/3.19.1...3.19.2)

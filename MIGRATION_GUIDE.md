@@ -16,10 +16,10 @@ This guide captures the changes you should be aware of when planning and upgradi
 **Classes or methods removed:**
 - The `impl` package has been removed as an export in `module-info.java`. This package contains implementation-specific code that may change at any point.
 - Support for the ES256K algorithm has been removed, as it is disabled in Java 15+. The `Algorithm#ECDSA256K(ECDSAKeyProvider keyProvider)` and `Algorithm#ECDSA256K(ECPublicKey publicKey, ECPrivateKey privateKey)` methods have been removed.
-- `com.auth0.jwt.interfaces.Clock` has been removed. Instead, an implementation of `java.time.Clock` can be passed to the `BaseVerification` for testing purposes.
-- `com.auth0.jwt.impl.NullClaim` has been removed. `Claim#isNull` can be used to determine if a claim's value is `null`.
-- `com.auth0.jwt.impl.PublicClaims` was removed, and replaced by `com.auth0.jwt.RegisteredClaims` and `com.auth0.jwt.HeaderParams`.
-- `com.auth0.jwt.interfaces.Verification#withAnyOfAudience` no longer provides a default implementation.
+- `com.auth0.jwt.android.interfaces.Clock` has been removed. Instead, an implementation of `java.time.Clock` can be passed to the `BaseVerification` for testing purposes.
+- `com.auth0.jwt.android.impl.NullClaim` has been removed. `Claim#isNull` can be used to determine if a claim's value is `null`.
+- `com.auth0.jwt.android.impl.PublicClaims` was removed, and replaced by `com.auth0.jwt.android.RegisteredClaims` and `com.auth0.jwt.android.HeaderParams`.
+- `com.auth0.jwt.android.interfaces.Verification#withAnyOfAudience` no longer provides a default implementation.
 
 ### Behavioral potentially breaking changes
 
@@ -39,7 +39,7 @@ This guide captures the changes you should be aware of when planning and upgradi
 
 #### Claim changes
 
-- `com.auth0.jwt.interfaces.Claim#isNull()` now returns true only if the claim is present and its value is `null`. Previously, it returned true if the claim was present and its value was `null`, or if the claim was not present in the JWT. To check if the claim is present or not in the JWT, use `isMissing()`.
+- `com.auth0.jwt.android.interfaces.Claim#isNull()` now returns true only if the claim is present and its value is `null`. Previously, it returned true if the claim was present and its value was `null`, or if the claim was not present in the JWT. To check if the claim is present or not in the JWT, use `isMissing()`.
 
 ### New classes or methods
 
